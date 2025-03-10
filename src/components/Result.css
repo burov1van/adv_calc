@@ -1,0 +1,109 @@
+/* src/components/Result.css */
+
+/* Подходящий бизнес-шрифт, например, Helvetica, Arial, или Roboto */
+.result-container {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  .result-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Таблица с выбранными параметрами */
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .result-table th,
+  .result-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .result-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  /* Блок задач */
+  .tasks-section {
+    margin-bottom: 20px;
+  }
+  
+  .tasks-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  /* Для списков */
+  .tasks-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+  
+  .no-options {
+    font-style: italic;
+    color: #888;
+  }
+  
+  /* Результаты числовые */
+  .result-values p {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+  
+  .result-values strong {
+    display: inline-block;
+    min-width: 250px;
+    font-weight: 600;
+  }
+  
+  /* Услуги */
+  .services {
+    margin-top: 20px;
+  }
+  
+  .services strong {
+    font-size: 17px;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  .services ul {
+    list-style: circle;
+    margin-left: 20px;
+  }
+  
+  /* Кнопки */
+  .result-buttons {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .result-buttons button {
+    background-color: #2a7ade;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    margin: 0 5px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .result-buttons button:hover {
+    background-color: #0065cf;
+  }
+  
