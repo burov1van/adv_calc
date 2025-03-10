@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // Если репо называется adv_calc
-  base: '/adv_calc/',
+  base: '/', // для Vercel сайт в корне домена
   plugins: [react()],
 })
