@@ -1,0 +1,51 @@
+/* src/index.css */
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  #calculator {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    margin: 5px 0;
+  }
+  
+  select,
+  input[type='radio'],
+  input[type='checkbox'] {
+    margin-bottom: 10px;
+  }
+  
+  .group {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  #result {
+    background: #f0f0f0;
+    padding: 15px;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    margin-top: 15px;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
