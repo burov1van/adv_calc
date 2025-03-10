@@ -1,109 +1,135 @@
-/* src/components/Result.css */
-
-/* Подходящий бизнес-шрифт, например, Helvetica, Arial, или Roboto */
 .result-container {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    color: #222;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #fafafa;
+}
+
+/* Заголовок (по центру) */
+.result-title {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #202124;
+}
+
+/* Карточки в стиле Material */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+/* Заголовки в карточках */
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #202124;
+  font-weight: 500;
+}
+
+/* Таблицы */
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  color: #3c4043;
+}
+
+.result-table thead th {
+  background-color: #f1f3f4;
+  font-weight: 500;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.result-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.result-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.result-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Блок с числовыми результатами */
+.result-values {
+  /* "card" уже оформляет фон/тень, можете добавить что-то при необходимости */
+}
+
+/* Сетка для значений (рекл. бюджет, клики и т.д.) */
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки на широких экранах */
+  gap: 12px 20px;
+}
+
+.value-item {
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid #eee;
+}
+
+.value-label {
+  font-weight: 500;
+  color: #202124;
+  margin-bottom: 4px;
+}
+
+.value-text {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Адаптивность: на узких экранах превращаем две колонки в одну */
+@media (max-width: 600px) {
+  .values-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .result-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* Таблица с выбранными параметрами */
-  .result-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
-  .result-table th,
-  .result-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-  }
-  
-  .result-table th {
-    background-color: #f9f9f9;
-    font-weight: bold;
-    text-align: left;
-  }
-  
-  /* Блок задач */
-  .tasks-section {
-    margin-bottom: 20px;
-  }
-  
-  .tasks-section h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  /* Для списков */
-  .tasks-section ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    margin-top: 5px;
-  }
-  
-  .no-options {
-    font-style: italic;
-    color: #888;
-  }
-  
-  /* Результаты числовые */
-  .result-values p {
-    margin: 8px 0;
-    font-size: 16px;
-  }
-  
-  .result-values strong {
-    display: inline-block;
-    min-width: 250px;
-    font-weight: 600;
-  }
-  
-  /* Услуги */
-  .services {
-    margin-top: 20px;
-  }
-  
-  .services strong {
-    font-size: 17px;
-    margin-bottom: 5px;
-    display: inline-block;
-  }
-  .services ul {
-    list-style: circle;
-    margin-left: 20px;
-  }
-  
-  /* Кнопки */
-  .result-buttons {
-    margin-top: 30px;
-    text-align: center;
-  }
-  
-  .result-buttons button {
-    background-color: #2a7ade;
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    margin: 0 5px;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .result-buttons button:hover {
-    background-color: #0065cf;
-  }
-  
+}
+
+/* Секция задач и услуг в одной таблице */
+.tasks-services-table ul {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 20px;
+}
+.no-options {
+  font-style: italic;
+  color: #777;
+}
+
+/* Кнопки */
+.result-buttons {
+  text-align: center;
+}
+
+.result-buttons button {
+  background-color: #4285f4;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  margin: 0 8px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.result-buttons button:hover {
+  background-color: #357ae8;
+}
