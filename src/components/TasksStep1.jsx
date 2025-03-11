@@ -1,8 +1,7 @@
-// src/components/TasksStep1.jsx
 import React, { useState } from 'react';
 import { tasks } from '../data';
 
-const TasksStep1 = ({ onNext, selectedTasks: initialSelectedTasks }) => {
+const TasksStep1 = ({ onNext, onBack, selectedTasks: initialSelectedTasks }) => {
   const [selectedTasks, setSelectedTasks] = useState(initialSelectedTasks || []);
 
   const handleCheckboxChange = (e) => {
@@ -40,10 +39,12 @@ const TasksStep1 = ({ onNext, selectedTasks: initialSelectedTasks }) => {
           </label>
         ))}
       </div>
-
-      <button onClick={handleNext} disabled={selectedTasks.length === 0}>
-        Далее
-      </button>
+      <div className="button-group">
+        <button onClick={onBack}>Назад</button>
+        <button onClick={handleNext} disabled={selectedTasks.length === 0}>
+          Далее
+        </button>
+      </div>
     </div>
   );
 };

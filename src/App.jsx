@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from 'react';
 import BusinessParams from './components/BusinessParams';
 import TasksStep1 from './components/TasksStep1';
@@ -21,7 +20,7 @@ function App() {
   // Формат: { [taskName]: [{ optionName, cost }, ...], ... }
   const [selectedTaskOptions, setSelectedTaskOptions] = useState({});
 
-  // Результат расчёта (бюджет, цена клика, цена лида, ...)
+  // Результат расчёта (бюджет, цена клика, цена лида, и т.д.)
   const [result, setResult] = useState(null);
 
   // Переход от шага 1 к шагу 2
@@ -36,7 +35,12 @@ function App() {
     setCurrentStep(3);
   };
 
-  // Вернуться с шага 3 обратно на шаг 2
+  // Функция возврата с шага 2 (TasksStep1) на шаг 1 (BusinessParams)
+  const handleBackFromTasksStep1 = () => {
+    setCurrentStep(1);
+  };
+
+  // Функция возврата с шага 3 (TasksStep2) на шаг 2 (TasksStep1)
   const handleBackFromTasksStep2 = () => {
     setCurrentStep(2);
   };
@@ -60,18 +64,13 @@ function App() {
     }
   };
 
-  // Кнопка «Назад» из результата – вернуться на шаг 3
+  // Кнопка «Назад» из результата – переход на шаг 3
   const handleResultBack = () => {
     setCurrentStep(3);
   };
 
-  // Кнопка «На главную»
+  // Кнопка «На главную» – переход к шагу 1 (опционально можно сбросить состояние)
   const handleResultHome = () => {
-    // можно сбросить все состояния, если нужно, или просто перейти на шаг 1
-    // setBusinessParams({});
-    // setSelectedTasks([]);
-    // setSelectedTaskOptions({});
-    // setResult(null);
     setCurrentStep(1);
   };
 
@@ -89,6 +88,7 @@ function App() {
       {currentStep === 2 && (
         <TasksStep1
           onNext={handleNextFromTasksStep1}
+          onBack={handleBackFromTasksStep1}
           selectedTasks={selectedTasks}
         />
       )}
