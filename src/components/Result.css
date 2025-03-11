@@ -133,3 +133,28 @@
 .result-buttons button:hover {
   background-color: #357ae8;
 }
+
+/* Контейнер под бегунок */
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.slider-container input[type="range"] {
+  width: 100%;       /* Заставляем бегунок растянуться на всю ширину контейнера */
+  margin: 12px 0;
+  cursor: pointer;
+  /* Дополнительная стилизация, если нужно:
+     height: 6px;
+     background: #dedede;
+     border-radius: 3px;
+     outline: none; 
+     ... */
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 600px;
+}

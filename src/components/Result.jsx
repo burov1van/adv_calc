@@ -1,5 +1,6 @@
-import React from 'react';
-import './Result.css';
+// src/components/Result.jsx
+import React, { useState } from 'react';
+import './Result.css'; // Подключаем стили
 
 const Result = ({
   result,
@@ -19,69 +20,73 @@ const Result = ({
     months
   } = businessParams;
 
-  // Парсим строки вида "От ₽62.40" в число, чтобы вычислить клики/лиды
+  // Функция для извлечения числа из строки вида "От ₽627900..."
   const parsePrice = (str) => {
     const cleaned = str.replace(/[^\d.]/g, "");
     return parseFloat(cleaned) || 0;
   };
 
-  const budgetNum = parsePrice(result.budget);
-  const clickNum = parsePrice(result.clickPrice);
-  const leadNum = parsePrice(result.leadPrice);
+  // Исходные числовые значения из результата
+  const originalBudget = parsePrice(result.budget);
+  const clickPriceNumber = parsePrice(result.clickPrice);
+  const leadPriceNumber = parsePrice(result.leadPrice);
 
-  // Количество кликов/лидов
-  const possibleClicks = (clickNum > 0 && budgetNum > 0)
-    ? Math.floor(budgetNum / clickNum)
-    : 0;
-  const possibleLeads = (leadNum > 0 && budgetNum > 0)
-    ? Math.floor(budgetNum / leadNum)
-    : 0;
+  // Локальное состояние для изменяемого бюджета через бегунок
+  const [adjustedBudget, setAdjustedBudget] = useState(originalBudget);
+
+  // Пересчёт прогнозируемых кликов и лидов по новому бюджету
+  const predictedClicks =
+    clickPriceNumber > 0 ? Math.floor(adjustedBudget / clickPriceNumber) : 0;
+  const predictedLeads =
+    leadPriceNumber > 0 ? Math.floor(adjustedBudget / leadPriceNumber) : 0;
+
+  // Обработчик изменения бегунка
+  const handleSliderChange = (e) => {
+    setAdjustedBudget(Number(e.target.value));
+  };
 
   return (
     <div className="result-container">
-      {/* Заголовок: Калькулятор по центру */}
       <h2 className="result-title">Калькулятор рекламного бюджета</h2>
 
-      {/* Карточка с основными параметрами */}
-      <div className="card">
-        <table className="result-table">
-          <thead>
-            <tr>
-              <th>Параметр</th>
-              <th>Выбранное значение</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Сфера бизнеса</td>
-              <td>{businessSphere || '—'}</td>
-            </tr>
-            <tr>
-              <td>Направление</td>
-              <td>{businessDirection && businessDirection !== '-' ? businessDirection : '—'}</td>
-            </tr>
-            <tr>
-              <td>Регион</td>
-              <td>{region || '—'}</td>
-            </tr>
-            <tr>
-              <td>Ассортимент</td>
-              <td>{assortment || '—'}</td>
-            </tr>
-            <tr>
-              <td>Срок</td>
-              <td>{months || '—'}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {/* Таблица с выбранными параметрами */}
+      <table className="result-table">
+        <thead>
+          <tr>
+            <th>Параметр</th>
+            <th>Выбранное значение</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Сфера бизнеса</td>
+            <td>{businessSphere || '—'}</td>
+          </tr>
+          <tr>
+            <td>Направление</td>
+            <td>{businessDirection && businessDirection !== '-' ? businessDirection : '—'}</td>
+          </tr>
+          <tr>
+            <td>Регион</td>
+            <td>{region || '—'}</td>
+          </tr>
+          <tr>
+            <td>Ассортимент</td>
+            <td>{assortment || '—'}</td>
+          </tr>
+          <tr>
+            <td>Срок</td>
+            <td>{months || '—'}</td>
+          </tr>
+        </tbody>
+      </table>
 
-      {/* Карточка с результатами: бюджет, клик, лид и т.д. */}
+      {/* Карточка с основными результатами */}
       <div className="card result-values">
         <div className="values-grid">
           <div className="value-item">
             <span className="value-label">Рекламный бюджет (примерный):</span>
-            <span className="value-text">{result.budget}</span>
+            <span className="value-text">От ₽{adjustedBudget} в месяц</span>
           </div>
           <div className="value-item">
             <span className="value-label">Цена клика:</span>
@@ -93,19 +98,38 @@ const Result = ({
           </div>
           <div className="value-item">
             <span className="value-label">Прогноз кликов:</span>
-            <span className="value-text">{possibleClicks}</span>
+            <span className="value-text">{predictedClicks}</span>
           </div>
           <div className="value-item">
             <span className="value-label">Прогноз лидов:</span>
-            <span className="value-text">{possibleLeads}</span>
+            <span className="value-text">{predictedLeads}</span>
           </div>
         </div>
       </div>
 
-      {/* Единый блок: задачи и услуги */}
+      {/* Бегунок для регулировки бюджета */}
+      <div className="slider-container card">
+        <label htmlFor="budgetSlider">
+          <strong>Настройте объем бюджета:</strong>
+        </label>
+        <input
+          type="range"
+          id="budgetSlider"
+          min="26000"
+          max={originalBudget}
+          value={adjustedBudget}
+          onChange={handleSliderChange}
+        />
+        <div className="slider-labels">
+          <span>26 000 ₽</span>
+          <span>{originalBudget} ₽</span>
+        </div>
+      </div>
+
+      {/* Блок с выбранными задачами и опциями */}
       {(selectedTasks.length > 0 || (result.services && result.services.length > 0)) && (
         <div className="card tasks-services-section">
-          <h3>Выбранные задачи и услуги</h3>
+          <h3>Выбранные задачи и опции</h3>
           <table className="result-table tasks-services-table">
             <thead>
               <tr>
@@ -114,17 +138,16 @@ const Result = ({
             </thead>
             <tbody>
               <tr>
-                {/* Одна колонка: задачи и опции */}
                 <td>
                   {selectedTasks.length > 0 ? (
                     <ul>
                       {selectedTasks.map((taskName) => {
                         const options = selectedTaskOptions[taskName];
                         return (
-                          <li key={taskName} style={{ marginBottom: '8px' }}>
+                          <li key={taskName} className="task-item">
                             <strong>{taskName}</strong>
                             {options && options.length > 0 && (
-                              <ul style={{ marginTop: '4px', marginLeft: '20px' }}>
+                              <ul className="options-list">
                                 {options.map((opt, idx) => (
                                   <li key={idx}>{opt.optionName}</li>
                                 ))}
@@ -144,7 +167,9 @@ const Result = ({
         </div>
       )}
 
-      {/* Кнопки */}
+
+
+      {/* Кнопки навигации */}
       <div className="result-buttons">
         <button onClick={onBack}>Назад</button>
         <button onClick={onHome}>На главную</button>
