@@ -54,15 +54,25 @@ export function calculateBudget(
   const businessObj = getBusinessObjectByName(selectedName, businesses);
   if (!businessObj) return null;
 
-  // === Расчёт бюджета ===
-  // cost[1] — базовый бюджет на 1000 кликов в «средних» условиях
+   // === Расчёт бюджета ===
+  // cost[1] – базовый бюджет на 1000 кликов при «средних» условиях
   const budgetOn1000 = parseFloat(businessObj.cost[1]);
   let budget = budgetOn1000 * regionCoeff * assortmentCoeff * tasksCoeffForBudget * monthsCoeff;
   let budgetRub = Math.floor(budget);
 
-  // Минимальный бюджет не должен быть ниже 26 000 рублей
-  if (budgetRub < 26000) {
-    budgetRub = 26000;
+  // Если опция "Пакет Напарник" выбрана в "Привлечь лиды", минимальный бюджет должен быть не ниже 64 000 ₽,
+  // иначе – минимальный бюджет не ниже 26 000 ₽.
+  let minBudget = 26000;
+  if (selectedTaskOptions["Привлечь лиды"]) {
+    const hasNaparnik = selectedTaskOptions["Привлечь лиды"].some(
+      (opt) => opt.optionName === "Пакет Напарник"
+    );
+    if (hasNaparnik) {
+      minBudget = 64000;
+    }
+  }
+  if (budgetRub < minBudget) {
+    budgetRub = minBudget;
   }
 
   // Ограничения бюджета (max cap) для разных регионов
