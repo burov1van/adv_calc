@@ -107,7 +107,7 @@ const BusinessParams = ({ onNext, initialParams }) => {
             checked={params.region === 'Вся Россия'}
             onChange={handleChange}
           />
-          Вся Россия (коэфф. 2)
+          Вся Россия (коэфф. 1,7)
         </label>
       </div>
 
@@ -134,7 +134,7 @@ const BusinessParams = ({ onNext, initialParams }) => {
             checked={params.assortment === 'Небольшой ассортимент (до 10 товарных категорий)'}
             onChange={handleChange}
           />
-          Небольшой ассортимент (коэфф. 1)
+          Небольшой ассортимент (до 10 товарных категорий) (коэфф. 1)
         </label>
         <label>
           <input
@@ -144,7 +144,7 @@ const BusinessParams = ({ onNext, initialParams }) => {
             checked={params.assortment === 'Средний ассортимент (до 50 товарных категорий)'}
             onChange={handleChange}
           />
-          Средний ассортимент (коэфф. 1)
+          Средний ассортимент (до 50 товарных категорий) (коэфф. 1,1)
         </label>
         <label>
           <input
@@ -154,7 +154,7 @@ const BusinessParams = ({ onNext, initialParams }) => {
             checked={params.assortment === 'Большой ассортимент (тысячи позиций)'}
             onChange={handleChange}
           />
-          Большой ассортимент (коэфф. 1.5)
+          Большой ассортимент (тысячи позиций) (коэфф. 1.3)
         </label>
         <label>
           <input
@@ -164,7 +164,7 @@ const BusinessParams = ({ onNext, initialParams }) => {
             checked={params.assortment === 'Мегамаркет, агрегатор или маркетплейс'}
             onChange={handleChange}
           />
-          Мегамаркет (коэфф. 2)
+          Мегамаркет, агрегатор или маркетплейс (коэфф. 2)
         </label>
       </div>
 
