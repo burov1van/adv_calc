@@ -20,10 +20,16 @@ const Result = ({
     months
   } = businessParams;
 
-  // Функция для извлечения числа из строки вида "От ₽627900..."
+  // --- Функция для извлечения числа из строки вида "От ₽627900..."
   const parsePrice = (str) => {
     const cleaned = str.replace(/[^\d.]/g, "");
     return parseFloat(cleaned) || 0;
+  };
+
+  // --- Функция для форматирования числа с разделением тысяч пробелами
+  const formatNumber = (num) => {
+    if (!num && num !== 0) return '';
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
 
   // Исходные числовые значения из результата
@@ -86,23 +92,30 @@ const Result = ({
         <div className="values-grid">
           <div className="value-item">
             <span className="value-label">Рекламный бюджет (примерный):</span>
-            <span className="value-text">От ₽{adjustedBudget} в месяц</span>
+            <span className="value-text">
+              От ₽{formatNumber(adjustedBudget)} в месяц
+            </span>
           </div>
           <div className="value-item">
             <span className="value-label">Цена клика:</span>
-            <span className="value-text">{result.clickPrice}</span>
+            <span className="value-text">
+              {/* Т.к. в result.clickPrice у нас строка вида "От ₽6279...", 
+                  то для красоты можно тоже подставить отформатированное число, 
+                  но нужно вырезать из неё чисто число и снова завернуть в ₽. */}
+              От ₽{formatNumber(clickPriceNumber)}
+            </span>
           </div>
           <div className="value-item">
             <span className="value-label">Цена лида:</span>
-            <span className="value-text">{result.leadPrice}</span>
+            <span className="value-text">От ₽{formatNumber(leadPriceNumber)}</span>
           </div>
           <div className="value-item">
             <span className="value-label">Прогноз кликов:</span>
-            <span className="value-text">{predictedClicks}</span>
+            <span className="value-text">{formatNumber(predictedClicks)}</span>
           </div>
           <div className="value-item">
             <span className="value-label">Прогноз лидов:</span>
-            <span className="value-text">{predictedLeads}</span>
+            <span className="value-text">{formatNumber(predictedLeads)}</span>
           </div>
         </div>
       </div>
@@ -121,8 +134,8 @@ const Result = ({
           onChange={handleSliderChange}
         />
         <div className="slider-labels">
-          <span>26 000 ₽</span>
-          <span>{originalBudget} ₽</span>
+          <span>{formatNumber(26000)} ₽</span>
+          <span>{formatNumber(originalBudget)} ₽</span>
         </div>
       </div>
 
@@ -166,8 +179,6 @@ const Result = ({
           </table>
         </div>
       )}
-
-
 
       {/* Кнопки навигации */}
       <div className="result-buttons">
